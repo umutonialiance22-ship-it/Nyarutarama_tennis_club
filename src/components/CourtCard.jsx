@@ -66,7 +66,7 @@ export default function CourtCard({ court }) {
                 href={club.contact.phoneHref}
                 className="mt-3 block rounded-full bg-night px-5 py-3 text-sm font-semibold text-white transition hover:bg-flame"
               >
-                📞 Call Operations Manager
+                 Call Operations Manager
               </a>
               <p className="mt-2 text-xs text-night/50">
                 {club.contact.name} · {club.contact.phoneDisplay}
@@ -80,15 +80,15 @@ export default function CourtCard({ court }) {
             </div>
           ) : (
             <button
-              onClick={handleBook}
-              className={`flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 font-semibold transition hover:shadow-lg ${
-                court.vip
-                  ? 'bg-ball text-night hover:shadow-ball/50'
-                  : 'bg-flame text-white hover:bg-flame-dark hover:shadow-flame/40'
-              }`}
-            >
-              Book {court.name}
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+               onClick={handleBook}
+               className={`mx-auto flex items-center justify-center gap-1.5 rounded-full px-5 py-2 text-sm font-semibold transition hover:shadow-lg ${
+               court.vip
+               ? 'bg-ball text-night hover:shadow-ball/50'
+               : 'bg-flame text-white hover:bg-flame-dark hover:shadow-flame/40'
+               }`}
+               >
+               Book {court.name}
+               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </button>
           )}
         </div>

@@ -75,8 +75,34 @@ export const coaches = [
   {
     id: 1,
     name: 'Rudashirikaka Aimable',
-    specialty: 'Operations Manager & Coach',
-    bio: 'Get in touch for coaching enquiries and anything about the club.',
+    role: 'Operations Manager & Coach',
+    phoneDisplay: '0788 744 202',
+    phoneHref: 'tel:+250788744202',
+    photo: '/images/coach-aimable.jpg',
+  },
+  {
+    id: 2,
+    name: 'MUHIRE Joshua',
+    role: 'Coach',
+    phoneDisplay: '0780 752 398',
+    phoneHref: 'tel:+250780752398',
+    photo: '/images/coach-joshua.jpg',
+  },
+  {
+    id: 3,
+    name: 'Alphonse HABIMANA',
+    role: 'Coach',
+    phoneDisplay: '0788 826 240',
+    phoneHref: 'tel:+250788826240',
+    photo: '/images/coach-alphonse.jpg',
+  },
+  {
+    id: 4,
+    name: 'Emmanuel MUGENZI',
+    role: 'Coach',
+    phoneDisplay: '0789 221 677',
+    phoneHref: 'tel:+250789221677',
+    photo: '/images/coach-emmanuel.jpg',
   },
 ]
 

@@ -6,7 +6,7 @@
   --color-ball: #c8f027;
   --color-night: #1d1712;
   --color-cream: #fbf7f2;
-  --font-display: "Poppins", system-ui, sans-serif;
+  --font-display: "Jost", system-ui, sans-serif;
 }
 
 html {
@@ -19,6 +19,6 @@ section[id] {
 
 body {
   margin: 0;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Jost", system-ui, sans-serif;
   color: #1d1712;
 }

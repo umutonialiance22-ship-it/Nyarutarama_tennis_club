@@ -18,13 +18,13 @@ export default function Navbar() {
         <ul className="hidden items-center gap-7 lg:flex">
           {navLinks.map((l) => (
             <li key={l.label}>
-              <a href={l.href} className="text-sm font-medium text-night/70 transition hover:text-flame">
+              <a href={l.href} className="text-base font-light tracking-wide text-night/70 transition hover:text-flame">
                 {l.label}
               </a>
             </li>
           ))}
           <li>
-            <Link to="/login" className="text-sm font-medium text-night/70 transition hover:text-flame">
+            <Link to="/login" className="text-base font-light tracking-wide text-night/70 transition hover:text-flame">
               Login
             </Link>
           </li>
