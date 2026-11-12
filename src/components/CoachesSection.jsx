@@ -8,7 +8,7 @@ export default function CoachesSection() {
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-flame">Coaches</p>
           <h2 className="mt-2 font-display text-3xl font-bold text-night sm:text-4xl">Meet our coaches</h2>
-          <p className="mt-3 text-night/60">Call a coach directly to ask about lessons and training.</p>
+          <p className="mt-3 text-night/60">Call a coach directly to ask about lessons and training, and booking on your behalf.</p>
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

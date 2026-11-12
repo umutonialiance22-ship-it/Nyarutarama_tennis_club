@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SmartImage from './SmartImage'
 import { club } from '../data/clubData'
-import { isLoggedIn } from '../utils/auth'
+import { useAuth } from '../context/AuthContext'
 
 export default function CourtCard({ court }) {
   const navigate = useNavigate()
+  const { user } = useAuth()
   const [showCall, setShowCall] = useState(false)
 
   const handleBook = () => {
@@ -16,7 +17,7 @@ export default function CourtCard({ court }) {
     }
     // General courts: booking page if logged in, otherwise register
     const target = `/book?court=${court.id}`
-    navigate(isLoggedIn() ? target : '/register', { state: { from: target } })
+    navigate(user ? target : '/register', { state: { from: target } })
   }
 
   return (
