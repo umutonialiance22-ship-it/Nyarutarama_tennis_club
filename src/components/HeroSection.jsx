@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { club } from '../data/clubData'
+import BookCourtButton from './BookCourtButton'
 
 export default function HeroSection() {
   const [imgFailed, setImgFailed] = useState(false)
@@ -8,9 +8,9 @@ export default function HeroSection() {
   return (
     <section id="home" className="bg-white pb-6 pt-20 sm:pt-24">
       {/* Rounded banner */}
-      <div className="relative mx-3 flex min-h-[75vh] items-center overflow-hidden rounded-[2rem] bg-night shadow-xl sm:mx-5 sm:rounded-[2.5rem] lg:mx-8 lg:rounded-[3rem]">
+      <div className="relative mx-3 flex min-h-[75vh] items-center overflow-hidden rounded-4xl bg-night shadow-xl sm:mx-5 sm:rounded-[2.5rem] lg:mx-8 lg:rounded-[3rem]">
         {/* Fallback background (shows if the photo is missing) */}
-        <div className="absolute inset-0 bg-gradient-to-br from-night via-[#2b1a10] to-night" />
+        <div className="absolute inset-0 bg-linear-to-br from-night via-[#2b1a10] to-night" />
 
         {/* Hero photo fills the whole banner */}
         {!imgFailed && (
@@ -23,7 +23,7 @@ export default function HeroSection() {
         )}
 
         {/* Dark overlay so the text stays readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-night/90 via-night/60 to-night/20" />
+        <div className="absolute inset-0 bg-linear-to-r from-night/90 via-night/60 to-night/20" />
         <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-flame/25 blur-3xl" />
         <div className="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-ball/10 blur-3xl" />
 
@@ -45,12 +45,7 @@ export default function HeroSection() {
           </p>
           <p className="mt-3 max-w-lg text-sm font-medium italic text-ball/90">{club.tagline}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              to="/book"
-              className="rounded-full bg-ball px-6 py-3 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-ball/30"
-            >
-              Book a Court
-            </Link>
+            <BookCourtButton className="rounded-full bg-ball px-6 py-3 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-ball/30" />
             <a
               href="#about"
               className="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:border-flame hover:text-flame"

@@ -4,7 +4,9 @@ import TextField from './components/TextField'
 import PasswordInput from './components/PasswordInput'
 import PasswordStrength from './PasswordStrength'
 import Notice from './Notice'
-import { register } from '../../services/authService'
+import { register, login } from '../../services/authService'
+import { useAuth } from '../../context/AuthContext'
+import { resolveDestination } from '../../utils/role'
 import { validateRegister } from '../../utils/validation'
 
 const initial = {
@@ -18,6 +20,7 @@ const initial = {
 
 export default function RegisterForm({ from, onSwitch }) {
   const navigate = useNavigate()
+  const { refresh } = useAuth()
 
   const [values, setValues] = useState(initial)
   const [touched, setTouched] = useState({})
@@ -54,11 +57,21 @@ export default function RegisterForm({ from, onSwitch }) {
         phone: values.phone.trim(),
         password: values.password,
       })
-      // Send them to log in (password is not kept anywhere)
+
+      try {
+        await login({ email, password: values.password })
+        const me = await refresh()
+        if (me) {
+          navigate(resolveDestination(me, from), { replace: true })
+          return
+        }
+      } catch {
+        // Fall back to the login page if automatic sign-in fails.
+      }
       navigate('/login', { replace: true, state: { registered: true, email, from } })
     } catch (err) {
       if (err.fieldErrors && Object.keys(err.fieldErrors).length) {
-        setServerErrors(err.fieldErrors) // e.g. "email already registered"
+        setServerErrors(err.fieldErrors)
         setFormError('Please fix the highlighted fields.')
       } else {
         setFormError(err.message)

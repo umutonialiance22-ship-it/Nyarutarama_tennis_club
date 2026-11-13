@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import BookCourtButton from './BookCourtButton'
 
 export default function BookingCTA() {
   return (
@@ -11,12 +11,7 @@ export default function BookingCTA() {
             Reserve your court in a few clicks and spend more time doing what you love.
           </p>
         </div>
-        <Link
-          to="/book"
-          className="shrink-0 rounded-full bg-ball px-6 py-2.5 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:shadow-xl"
-        >
-          Book a Court
-        </Link>
+        <BookCourtButton className="shrink-0 rounded-full bg-ball px-6 py-2.5 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:shadow-xl" />
       </div>
     </section>
   )

@@ -1,7 +1,7 @@
 export default function ImagePlaceholder({ label = 'Photo placeholder', className = '' }) {
   return (
     <div
-      className={`flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-flame via-flame-dark to-night text-white/80 ${className}`}
+      className={`flex flex-col items-center justify-center gap-2 bg-linear-to-br from-flame via-flame-dark to-night text-white/80 ${className}`}
       role="img"
       aria-label={label}
     >

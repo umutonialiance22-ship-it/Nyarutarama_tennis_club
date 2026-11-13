@@ -35,7 +35,7 @@ export default function LoginForm({ from, registered, prefillEmail, onSwitch }) 
       await login({ email: values.email.trim().toLowerCase(), password: values.password })
       const me = await refresh() // the backend tells us who is signed in
       if (!me) throw new ApiError('You are signed in, but we could not load your account. Please try again.')
-      navigate(from || '/book', { replace: true })
+      navigate(resolveDestination(me, from), { replace: true })
     } catch (err) {
       setFormError(
         err.status === 400 || err.status === 401

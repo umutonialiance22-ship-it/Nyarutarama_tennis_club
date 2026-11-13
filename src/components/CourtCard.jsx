@@ -1,12 +1,10 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import SmartImage from './SmartImage'
 import { club } from '../data/clubData'
-import { useAuth } from '../context/AuthContext'
+import useBookCourt from '../hooks/useBookCourt'
 
 export default function CourtCard({ court }) {
-  const navigate = useNavigate()
-  const { user } = useAuth()
+  const bookCourt = useBookCourt()
   const [showCall, setShowCall] = useState(false)
 
   const handleBook = () => {
@@ -15,11 +13,9 @@ export default function CourtCard({ court }) {
       setShowCall(!showCall)
       return
     }
-    // General courts: booking page if logged in, otherwise register
-    const target = `/book?court=${court.id}`
-    navigate(user ? target : '/register', { state: { from: target } })
+   // General courts: same role-aware logic, logged-out visitors land on Register
+    bookCourt({ target: `/courts?court=${court.id}`, loggedOutPage: '/register' })
   }
-
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-flame/20 hover:ring-flame/40">
       {/* Photo */}

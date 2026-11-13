@@ -36,7 +36,7 @@ export default function AuthPage({ mode = 'login' }) {
   }
 
   // Already signed in: send them on their way
-  if (user) return <Navigate to={from || '/book'} replace />
+ if (user) return <Navigate to={resolveDestination(user, from)} replace />
 
   const switchTo = (m) => {
     setAuthMethod(null)

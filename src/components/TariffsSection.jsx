@@ -51,7 +51,7 @@ export default function TariffsSection() {
                     <h4 className="font-display font-semibold">{p.name}</h4>
                   </header>
                   <div className="overflow-x-auto">
-                    <table className="w-full min-w-[440px] text-left text-sm">
+                    <table className="w-full min-w-110 text-left text-sm">
                       <thead>
                         <tr className="bg-cream text-xs text-night/60">
                           <th className="px-4 py-2 font-medium">Who</th>

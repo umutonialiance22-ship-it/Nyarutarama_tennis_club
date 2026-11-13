@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { club, navLinks } from '../data/clubData'
+import BookCourtButton from './BookCourtButton'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -29,12 +30,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link
-              to="/book"
-              className="rounded-full bg-ball px-5 py-2 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-ball/40"
-            >
-              Book a Court
-            </Link>
+            <BookCourtButton className="rounded-full bg-ball px-5 py-2 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-ball/40" />
           </li>
         </ul>
 
@@ -68,13 +64,10 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>
-          <Link
-            to="/book"
+          <BookCourtButton
             onClick={close}
-            className="mt-3 block rounded-full bg-ball py-3 text-center font-semibold text-night"
-          >
-            Book a Court
-          </Link>
+            className="mt-3 block w-full rounded-full bg-ball py-3 text-center font-semibold text-night"
+          />
         </div>
       )}
     </header>
