@@ -37,7 +37,7 @@ function parseFieldErrors(data) {
   return out
 }
 
-async function request(path, { method = 'GET', body } = {}) {
+export async function request(path, { method = 'GET', body } = {}) {
   let res
   try {
     res = await fetch(`${API_URL}${path}`, {

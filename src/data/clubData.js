@@ -219,3 +219,5 @@ export const packages = [
     ],
   },
 ]
+// Booking hours: first slot starts at 6:00, last slot ends at 21:00 (9 PM)
+export const bookingConfig = { openHour: 6, closeHour: 21 }

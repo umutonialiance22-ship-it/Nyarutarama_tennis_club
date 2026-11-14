@@ -5,6 +5,7 @@ import PasswordInput from './components/PasswordInput'
 import Notice from './Notice'
 import { useAuth } from '../../context/AuthContext'
 import { login, ApiError } from '../../services/authService'
+import { resolveDestination } from '../../utils/role'
 import { validateLogin } from '../../utils/validation'
 
 export default function LoginForm({ from, registered, prefillEmail, onSwitch }) {

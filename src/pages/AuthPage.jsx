@@ -6,6 +6,7 @@ import GoogleButton from '../auth/components/GoogleButton'
 import Notice from '../auth/components/Notice'
 import LoginForm from '../auth/components/LoginForm'
 import RegisterForm from '../auth/components/RegisterForm'
+import { resolveDestination } from '../utils/role'
 
 const COPY = {
   login: {
