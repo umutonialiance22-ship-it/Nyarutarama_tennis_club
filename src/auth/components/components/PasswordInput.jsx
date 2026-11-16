@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import TextField from './TextField'
+import { useLang } from '../../../context/LanguageContext'
 
 const EyeIcon = ({ off }) => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -11,6 +12,7 @@ const EyeIcon = ({ off }) => (
 
 export default function PasswordInput(props) {
   const [show, setShow] = useState(false)
+  const { t } = useLang()
 
   return (
     <TextField
@@ -20,7 +22,7 @@ export default function PasswordInput(props) {
         <button
           type="button"
           onClick={() => setShow(!show)}
-          aria-label={show ? 'Hide password' : 'Show password'}
+          aria-label={show ? t('Hide password') : t('Show password')}
           aria-pressed={show}
           className="rounded-md p-1 text-night/50 transition hover:text-flame focus:outline-none focus-visible:ring-2 focus-visible:ring-flame/40"
         >

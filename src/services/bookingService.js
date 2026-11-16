@@ -1,5 +1,5 @@
 import { request, ApiError } from './authService'
-
+import { demoAddNotification } from './notificationService'
 // DEV-ONLY preview: set VITE_DEMO_MODE=true in .env to see sample bookings without a backend.
 // It can never be on in a production build.
 const DEMO = import.meta.env.DEV && import.meta.env.VITE_DEMO_MODE === 'true'
@@ -59,10 +59,28 @@ export async function createBooking({ court, date, hour }) {
       throw new ApiError('That slot was just taken. Please choose another time.', 409)
     }
     day.push({ id: `${date}-${court}-${hour}`, court, hour, mine: true })
+    demoAddNotification({ type: 'booking_confirmed', data: { court, date, hour } })
     return
   }
   await request(ENDPOINTS.create, {
     method: 'POST',
     body: { court, date, start_time: `${String(hour).padStart(2, '0')}:00` },
   })
+}
+// Django must check the booking belongs to this user, is not in the past,
+// and mark it cancelled (soft delete) so the slot becomes free again.
+export async function cancelBooking(id) {
+  if (DEMO) {
+    await wait(300)
+    for (const [date, day] of Object.entries(demoStore)) {
+      const i = day.findIndex((b) => b.id === id && b.mine)
+      if (i > -1) {
+        const [removed] = day.splice(i, 1)
+        demoAddNotification({ type: 'booking_cancelled', data: { court: removed.court, date, hour: removed.hour } })
+        return
+      }
+    }
+    throw new ApiError('Booking not found.', 404, {}, 'not_found')
+  }
+  await request(`${ENDPOINTS.create}${id}/cancel/`, { method: 'POST' })
 }

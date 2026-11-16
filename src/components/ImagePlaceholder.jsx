@@ -1,7 +1,10 @@
-export default function ImagePlaceholder({ label = 'Photo placeholder', className = '' }) {
+import { useLang } from '../context/LanguageContext'
+
+export default function ImagePlaceholder({ label = 'Photo', className = '' }) {
+  const { t } = useLang()
   return (
     <div
-      className={`flex flex-col items-center justify-center gap-2 bg-linear-to-br from-flame via-flame-dark to-night text-white/80 ${className}`}
+      className={`flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-flame via-flame-dark to-night text-white/80 ${className}`}
       role="img"
       aria-label={label}
     >
@@ -10,7 +13,7 @@ export default function ImagePlaceholder({ label = 'Photo placeholder', classNam
         <circle cx="9" cy="10" r="2" />
         <path d="M21 16l-5-5-8 9" />
       </svg>
-      <span className="text-xs uppercase tracking-widest">{label}</span>
+      <span className="text-xs uppercase tracking-widest">{t('Photo placeholder')}</span>
     </div>
   )
-}
+} 

@@ -1,7 +1,9 @@
 import useBookCourt from '../hooks/useBookCourt'
+import { useLang } from '../context/LanguageContext'
 
-export default function BookCourtButton({ className = '', children = 'Book a Court', onClick, ...rest }) {
+export default function BookCourtButton({ className = '', children, onClick, ...rest }) {
   const bookCourt = useBookCourt()
+  const { t } = useLang()
 
   return (
     <button
@@ -13,7 +15,7 @@ export default function BookCourtButton({ className = '', children = 'Book a Cou
       }}
       className={className}
     >
-      {children}
+      {children ?? t('nav.bookCourt')}
     </button>
   )
 }

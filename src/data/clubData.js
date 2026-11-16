@@ -19,12 +19,12 @@ export const club = {
 }
 
 export const navLinks = [
-  { label: 'Home', href: '/#home' },
-  { label: 'About Us', href: '/#about' },
-  { label: 'Courts', href: '/#courts' },
-  { label: 'Tariffs', href: '/#tariffs' },
-  { label: 'Coaches', href: '/#coaches' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Home', key: 'nav.home', href: '/#home' },
+  { label: 'About Us', key: 'nav.about', href: '/#about' },
+  { label: 'Courts', key: 'nav.courts', href: '/#courts' },
+  { label: 'Tariffs', key: 'nav.tariffs', href: '/#tariffs' },
+  { label: 'Coaches', key: 'nav.coaches', href: '/#coaches' },
+  { label: 'Contact', key: 'nav.contact', href: '/#contact' },
 ]
 
 export const courts = [
@@ -112,10 +112,10 @@ export const coaches = [
 export const durations = ['1 Month', '3 Months', '6 Months', '1 Year']
 
 export const sessionRates = [
-  { label: 'Tennis, 1 person', price: '8,000 Rwf / hour' },
-  { label: 'Child under 18', price: '4,000 Rwf / hour' },
-  { label: 'Single (2 persons)', price: '14,000 Rwf / hour' },
-  { label: 'Double (4 persons)', price: '24,000 Rwf / hour' },
+  { label: 'Tennis, 1 person', amount: '8,000' },
+  { label: 'Child under 18', amount: '4,000' },
+  { label: 'Single (2 persons)', amount: '14,000' },
+  { label: 'Double (4 persons)', amount: '24,000' },
 ]
 
 export const packages = [

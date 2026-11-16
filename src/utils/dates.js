@@ -16,8 +16,8 @@ export function addDays(iso, n) {
   return toISODate(d)
 }
 
-export function formatLong(iso) {
-  return fromISODate(iso).toLocaleDateString('en-GB', {
+export function formatLong(iso, locale = 'en-GB') {
+  return fromISODate(iso).toLocaleDateString(locale, {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
@@ -32,4 +32,7 @@ export function isPastSlot(iso, hour) {
   const slot = fromISODate(iso)
   slot.setHours(hour, 0, 0, 0)
   return slot <= new Date()
+}
+export function formatShort(iso, locale = 'en-GB') {
+  return fromISODate(iso).toLocaleDateString(locale, { day: 'numeric', month: 'short', year: 'numeric' })
 }

@@ -1,14 +1,17 @@
 import SmartImage from './SmartImage'
 import { coaches } from '../data/clubData'
+import { useLang } from '../context/LanguageContext'
 
 export default function CoachesSection() {
+  const { t } = useLang()
+
   return (
     <section id="coaches" className="bg-cream py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-flame">Coaches</p>
-          <h2 className="mt-2 font-display text-3xl font-bold text-night sm:text-4xl">Meet our coaches</h2>
-          <p className="mt-3 text-night/60">Call a coach directly to ask about lessons and training, and booking on your behalf.</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-flame">{t('nav.coaches')}</p>
+          <h2 className="mt-2 font-display text-3xl font-bold text-night sm:text-4xl">{t('Meet our coaches')}</h2>
+          <p className="mt-3 text-night/60">{t('Call a coach directly to ask about lessons and training.')}</p>
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -26,7 +29,7 @@ export default function CoachesSection() {
               />
               <div className="p-5">
                 <h3 className="font-display text-base font-bold text-night">{c.name}</h3>
-                <p className="mt-1 text-sm font-semibold text-flame">{c.role}</p>
+                <p className="mt-1 text-sm font-semibold text-flame">{t(c.role)}</p>
                 <a
                   href={c.phoneHref}
                   className="mt-4 inline-block rounded-full bg-ball px-4 py-2 text-xs font-semibold text-night transition hover:shadow-lg hover:shadow-ball/40"

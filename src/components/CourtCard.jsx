@@ -1,98 +1,68 @@
 import { useState } from 'react'
 import SmartImage from './SmartImage'
 import { club } from '../data/clubData'
+import { useAuth } from '../context/AuthContext'
+import { useLang } from '../context/LanguageContext'
 import useBookCourt from '../hooks/useBookCourt'
+import { canBookVip } from '../utils/role'
 
 export default function CourtCard({ court }) {
   const bookCourt = useBookCourt()
+  const { user } = useAuth()
+  const { t } = useLang()
   const [showCall, setShowCall] = useState(false)
 
+  const label = t('court.n', { n: court.id })
+  const category = court.vip ? t('court.vip') : t('court.general')
+
   const handleBook = () => {
-    // VIP court: show the "call operations manager" option
-    if (court.vip) {
+    // VIP court: only VIP customers (and the manager) can book it themselves
+    if (court.vip && !canBookVip(user)) {
       setShowCall(!showCall)
       return
     }
-   // General courts: same role-aware logic, logged-out visitors land on Register
     bookCourt({ target: `/courts?court=${court.id}`, loggedOutPage: '/register' })
   }
+
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-flame/20 hover:ring-flame/40">
-      {/* Photo */}
-      <div className="relative">
-        <SmartImage
-          src={court.image}
-          alt={`${court.name} - ${court.category}`}
-          label={`${court.name} photo`}
-          className="h-52 w-full"
-          imgClassName="transition duration-700 ease-out group-hover:scale-110"
-        />
-        <span
-          className={`absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-bold shadow transition duration-500 group-hover:scale-105 ${
-            court.vip ? 'bg-ball text-night' : 'bg-white text-night'
-          }`}
-        >
-          {court.category}
-        </span>
-      </div>
+    <article className="group relative aspect-[6/5] overflow-hidden rounded-[1.5rem] bg-night shadow-md ring-1 ring-black/5 transition duration-500 hover:shadow-2xl">
+      <SmartImage
+        src={court.image}
+        alt={`${label} - ${category}`}
+        label={`${label} photo`}
+        className="absolute inset-0 h-full w-full"
+        imgClassName="transition duration-700 ease-out group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-      {/* Content */}
-      <div className="flex flex-1 flex-col p-6">
-        <h3 className="font-display text-xl font-bold text-night transition group-hover:text-flame">
-          {court.name}
-        </h3>
-        <p className="mt-2 text-sm text-night/70">{court.description}</p>
+      <div className="absolute inset-x-0 bottom-0 p-6 transition duration-500 group-hover:-translate-y-1">
+        <p className="text-[11px] font-medium uppercase tracking-[0.25em] text-white/70">{category}</p>
+        <h3 className="mt-1 font-display text-3xl font-semibold text-white">{label}</h3>
 
-        <dl className="mt-5 space-y-2 border-t border-black/5 pt-4">
-          {court.info.map((i) => (
-            <div key={i.label} className="flex justify-between text-sm">
-              <dt className="text-night/50">{i.label}</dt>
-              <dd className="font-medium text-flame-dark">{i.value}</dd>
-            </div>
-          ))}
-        </dl>
-
-        {/* Book area */}
-        <div className="mt-auto pt-6">
-          {court.vip && showCall ? (
-            <div className="rounded-xl bg-ball/30 p-4 text-center ring-1 ring-ball">
-              <p className="text-sm text-night/70">
-                VIP court bookings are arranged with our Operations Manager.
-              </p>
-              <a
-                href={club.contact.phoneHref}
-                className="mt-3 block rounded-full bg-night px-5 py-3 text-sm font-semibold text-white transition hover:bg-flame"
-              >
-                 Call Operations Manager
-              </a>
-              <p className="mt-2 text-xs text-night/50">
-                {club.contact.name} · {club.contact.phoneDisplay}
-              </p>
-              <button
-                onClick={() => setShowCall(false)}
-                className="mt-2 text-xs text-night/50 underline hover:text-flame"
-              >
-                Close
-              </button>
-            </div>
-          ) : (
+        {court.vip && showCall ? (
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <a
+              href={club.contact.phoneHref}
+              className="rounded-full bg-ball px-4 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-night transition hover:shadow-lg hover:shadow-ball/40"
+            >
+               {t('court.callManager')}
+            </a>
             <button
-               onClick={handleBook}
-               className={`mx-auto flex items-center justify-center gap-1.5 rounded-full px-5 py-2 text-sm font-semibold transition hover:shadow-lg ${
-               court.vip
-               ? 'bg-ball text-night hover:shadow-ball/50'
-               : 'bg-flame text-white hover:bg-flame-dark hover:shadow-flame/40'
-               }`}
-               >
-               Book {court.name}
-               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              onClick={() => setShowCall(false)}
+              className="text-xs uppercase tracking-[0.15em] text-white/70 underline-offset-4 hover:text-white hover:underline"
+            >
+              {t('court.close')}
             </button>
-          )}
-        </div>
+          </div>
+        ) : (
+          <button
+            onClick={handleBook}
+            className="mt-2 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-ball transition-all hover:gap-3 hover:text-white"
+          >
+            {t('court.book')} <span aria-hidden>→</span>
+          </button>
+        )}
       </div>
-
-      {/* Growing bar on hover */}
-      <span className="absolute bottom-0 left-0 h-1 w-0 bg-flame transition-all duration-500 group-hover:w-full" />
     </article>
   )
 }

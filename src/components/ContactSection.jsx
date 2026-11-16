@@ -1,4 +1,5 @@
 import { club } from '../data/clubData'
+import { useLang } from '../context/LanguageContext'
 
 function Card({ title, children }) {
   return (
@@ -10,29 +11,26 @@ function Card({ title, children }) {
 }
 
 export default function ContactSection() {
+  const { t } = useLang()
+
   return (
     <section id="contact" className="bg-white py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-flame">Contact</p>
-          <h2 className="mt-2 font-display text-3xl font-bold text-night sm:text-4xl">Find us and get in touch</h2>
+          <p className="text-sm font-semibold uppercase tracking-widest text-flame">{t('nav.contact')}</p>
+          <h2 className="mt-2 font-display text-3xl font-bold text-night sm:text-4xl">{t('Find us and get in touch')}</h2>
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
           <div className="grid gap-5 sm:grid-cols-2">
-            <Card title="Address">{club.address}</Card>
+            <Card title={t('Address')}>{club.address}</Card>
 
-            <Card title="Opening Hours">
-              {club.hours.map((h) => (
-                <p key={h.day}>
-                  <span className="font-semibold text-night">{h.time}</span>
-                  <br />
-                  <span className="text-sm">{h.day} ({club.hoursSummary.toLowerCase()})</span>
-                </p>
-              ))}
+            <Card title={t('Opening Hours')}>
+              <p className="font-semibold text-night">{t('booking.hours')}</p>
+              <p className="text-sm">{t('Every day, 7 days a week')}</p>
             </Card>
 
-            <Card title="Operations Manager & Coach">
+            <Card title={t('Operations Manager & Coach')}>
               <p className="font-semibold text-night">{club.contact.name}</p>
               <a href={club.contact.phoneHref} className="text-flame-dark hover:underline">
                 {club.contact.phoneDisplay}
@@ -41,7 +39,7 @@ export default function ContactSection() {
 
             <Card title="Instagram">
               <a href={club.instagram} target="_blank" rel="noreferrer" className="font-medium text-flame-dark hover:underline">
-                Follow us on Instagram
+                {t('Follow us on Instagram')}
               </a>
             </Card>
 
@@ -49,14 +47,13 @@ export default function ContactSection() {
               href={club.contact.phoneHref}
               className="rounded-full bg-ball px-6 py-3 text-center font-semibold text-night transition hover:shadow-lg hover:shadow-ball/40 sm:col-span-2"
             >
-              Call us now
+              {t('Call us now')}
             </a>
           </div>
 
-          {/* Map */}
           <div className="overflow-hidden rounded-2xl ring-1 ring-black/10">
             <iframe
-              title="Nyarutarama Sports Centre location"
+              title={t('Nyarutarama Sports Centre location')}
               src={club.mapEmbed}
               className="h-72 w-full border-0 sm:h-80"
               loading="lazy"
@@ -68,7 +65,7 @@ export default function ContactSection() {
               rel="noreferrer"
               className="block bg-flame py-3 text-center text-sm font-semibold text-white transition hover:bg-flame-dark"
             >
-              Open in Google Maps
+              {t('Open in Google Maps')}
             </a>
           </div>
         </div>

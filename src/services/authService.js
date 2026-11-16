@@ -9,10 +9,11 @@ const ENDPOINTS = {
 }
 
 export class ApiError extends Error {
-  constructor(message, status = 0, fieldErrors = {}) {
+  constructor(message, status = 0, fieldErrors = {}, code = '') {
     super(message)
     this.status = status
     this.fieldErrors = fieldErrors
+    this.code = code
   }
 }
 
@@ -61,9 +62,11 @@ export async function request(path, { method = 'GET', body } = {}) {
     throw new ApiError(
       data?.detail || 'Something went wrong. Please try again.',
       res.status,
-      parseFieldErrors(data)
+      parseFieldErrors(data),
+      data?.detail ? '' : 'generic'
     )
   }
+
   return data
 }
 

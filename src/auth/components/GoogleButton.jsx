@@ -1,3 +1,5 @@
+import { useLang } from '../../context/LanguageContext'
+
 const GoogleIcon = () => (
   <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
     <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
@@ -10,6 +12,8 @@ const GoogleIcon = () => (
 // PLACEHOLDER: this does NOT sign anyone in.
 // Later, the click should start a real OAuth 2.0 / OpenID Connect flow handled by the Django backend.
 export default function GoogleButton({ onClick }) {
+  const { t } = useLang()
+
   return (
     <button
       type="button"
@@ -19,7 +23,7 @@ export default function GoogleButton({ onClick }) {
       <GoogleIcon />
       Continue with Google
       <span className="absolute right-3 rounded-full bg-cream px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-night/50">
-        Soon
+        {t('Soon')}
       </span>
     </button>
   )

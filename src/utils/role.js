@@ -4,18 +4,18 @@ export const ROLES = {
   OPERATIONS_MANAGER: 'OPERATIONS_MANAGER',
 }
 
-// Where each role lands
+// Where each role lands (Version 0.1: coaches use the normal booking page)
 const ROLE_HOME = {
-  CUSTOMER: '/courts', // Court Availability (to be built)
-  COACH: '/coach', // Coach Dashboard (to be built)
-  OPERATIONS_MANAGER: '/manager', // Manager Dashboard (to be built)
+  CUSTOMER: '/courts',
+  COACH: '/courts',
+  OPERATIONS_MANAGER: '/manager',
 }
 
 // Which pages each role may open (frontend convenience only, Django enforces the real rules)
 const ROLE_ROUTES = {
   CUSTOMER: ['/courts'],
-  COACH: ['/coach'],
-  OPERATIONS_MANAGER: ['/manager'],
+  COACH: ['/courts'],
+  OPERATIONS_MANAGER: ['/manager', '/courts'],
 }
 
 export function normalizeRole(user) {
@@ -42,4 +42,8 @@ export function resolveDestination(user, from) {
   const target = safePath(from)
   if (target && canAccess(user, target)) return target
   return homeForUser(user)
-}   
+}
+// Can this person book the VIP court themselves? (UI convenience only: Django decides for real)
+export function canBookVip(user) {
+  return normalizeRole(user) === 'OPERATIONS_MANAGER' || Boolean(user?.is_vip ?? user?.isVip)
+}

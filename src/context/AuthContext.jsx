@@ -14,7 +14,11 @@ export function AuthProvider({ children }) {
   // Ask the backend who is signed in. Returns the user, or null.
   const refresh = useCallback(async () => {
     if (DEMO) {
-      const me = { full_name: 'Demo Customer', role: 'CUSTOMER' }
+        
+      const me =
+       import.meta.env.VITE_DEMO_ROLE === 'OPERATIONS_MANAGER'
+        ? { full_name: 'Rudashirikaka Aimable', role: 'OPERATIONS_MANAGER' }
+        : { full_name: 'Demo Customer', role: 'CUSTOMER', is_vip: import.meta.env.VITE_DEMO_VIP === 'true' }
       setUser(me)
       setLoading(false)
       return me
