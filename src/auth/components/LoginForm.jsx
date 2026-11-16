@@ -21,6 +21,7 @@ export default function LoginForm({ from, registered, prefillEmail, onSwitch }) 
   const [submitting, setSubmitting] = useState(false)
   const [formError, setFormError] = useState('')
   const [googleNotice, setGoogleNotice] = useState(false)
+  const [emailSelected, setEmailSelected] = useState(false)
 
   const errors = validateLogin(values)
   const isValid = Object.keys(errors).length === 0
@@ -59,60 +60,79 @@ export default function LoginForm({ from, registered, prefillEmail, onSwitch }) 
       {registered && <Notice type="success">{t('Your account was created successfully. Please log in below.')}</Notice>}
       {formError && <Notice type="error">{formError}</Notice>}
 
-      <TextField
-        label={t('Email address')}
-        id="login-email"
-        name="email"
-        type="email"
-        autoComplete="email"
-        placeholder="you@example.com"
-        value={values.email}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        error={showError('email')}
-        required
-      />
-
-      <div>
-        <PasswordInput
-          label={t('Password')}
-          id="login-password"
-          name="password"
-          autoComplete="current-password"
-          placeholder={t('Enter your password')}
-          value={values.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={showError('password')}
-          required
-        />
-        <div className="mt-2 text-right">
-          <Link to="/forgot-password" className="text-sm font-medium text-flame-dark hover:underline">
-            {t('Forgot password?')}
-          </Link>
+      {!emailSelected && (
+        <div className="space-y-3">
+          <GoogleButton onClick={() => setGoogleNotice(true)} />
+          <button
+            type="button"
+            onClick={() => {
+              setEmailSelected(true)
+              setGoogleNotice(false)
+            }}
+            className="w-full rounded-xl bg-ball px-4 py-3 text-sm font-semibold text-night transition hover:shadow-lg hover:shadow-ball/40"
+          >
+            {t('Continue with email')}
+          </button>
+          {googleNotice && (
+            <Notice type="info">
+              {t('Google sign-in is a placeholder for now and will work once the backend is connected. Please use your email and password.')}
+            </Notice>
+          )}
         </div>
-      </div>
+      )}
 
-      <button
-        type="submit"
-        disabled={submitting || !isValid}
-        className="flex w-full items-center justify-center gap-2 rounded-full bg-ball py-3 font-semibold text-night transition hover:shadow-lg hover:shadow-ball/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-none"
-      >
-        {submitting && <span className="h-4 w-4 animate-spin rounded-full border-2 border-night/30 border-t-night" />}
-        {submitting ? t('Logging in...') : t('Login')}
-      </button>
+      {emailSelected && (
+        <div className="space-y-5">
+          <TextField
+            label={t('Email address')}
+            id="login-email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            placeholder="you@example.com"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={showError('email')}
+            required
+          />
 
-      <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-night/40">
-        <span className="h-px flex-1 bg-black/10" />
-        {t('or')}
-        <span className="h-px flex-1 bg-black/10" />
-      </div>
+          <div>
+            <PasswordInput
+              label={t('Password')}
+              id="login-password"
+              name="password"
+              autoComplete="current-password"
+              placeholder={t('Enter your password')}
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={showError('password')}
+              required
+            />
+            <div className="mt-2 text-right">
+              <Link to="/forgot-password" className="text-sm font-medium text-flame-dark hover:underline">
+                {t('Forgot password?')}
+              </Link>
+            </div>
+          </div>
 
-      <GoogleButton onClick={() => setGoogleNotice(true)} />
-      {googleNotice && (
-        <Notice type="info">
-          {t('Google sign-in is a placeholder for now and will work once the backend is connected. Please use your email and password.')}
-        </Notice>
+          <button
+            type="submit"
+            disabled={submitting || !isValid}
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-ball py-3 font-semibold text-night transition hover:shadow-lg hover:shadow-ball/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-none"
+          >
+            {submitting && <span className="h-4 w-4 animate-spin rounded-full border-2 border-night/30 border-t-night" />}
+            {submitting ? t('Logging in...') : t('Login')}
+          </button>
+          <button
+            type="button"
+            onClick={() => setEmailSelected(false)}
+            className="w-full text-sm font-medium text-flame-dark hover:underline"
+          >
+            {t('← Back to options')}
+          </button>
+        </div>
       )}
 
       <p className="text-center text-sm text-night/70">

@@ -21,10 +21,7 @@ export default function GoogleButton({ onClick }) {
       className="relative flex w-full items-center justify-center gap-3 rounded-xl border border-black/10 bg-white px-4 py-3 text-sm font-medium text-night transition hover:bg-cream hover:shadow-sm"
     >
       <GoogleIcon />
-      Continue with Google
-      <span className="absolute right-3 rounded-full bg-cream px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-night/50">
-        {t('Soon')}
-      </span>
+      {t('Continue with Google')}
     </button>
   )
 }

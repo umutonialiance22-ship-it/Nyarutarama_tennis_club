@@ -25,6 +25,7 @@ export default function RegisterForm({ from, onSwitch }) {
   const [submitting, setSubmitting] = useState(false)
   const [formError, setFormError] = useState('')
   const [googleNotice, setGoogleNotice] = useState(false)
+  const [emailSelected, setEmailSelected] = useState(false)
 
   const errors = validateRegister(values)
   const isValid = Object.keys(errors).length === 0
@@ -87,6 +88,28 @@ export default function RegisterForm({ from, onSwitch }) {
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
       {formError && <Notice type="error">{formError}</Notice>}
 
+      {!emailSelected && (
+        <div className="space-y-3">
+          <GoogleButton onClick={() => setGoogleNotice(true)} />
+          <button
+            type="button"
+            onClick={() => {
+              setEmailSelected(true)
+              setGoogleNotice(false)
+            }}
+            className="w-full rounded-xl bg-ball px-4 py-3 text-sm font-semibold text-night transition hover:shadow-lg hover:shadow-ball/40"
+          >
+            {t('Continue with email')}
+          </button>
+          {googleNotice && (
+            <Notice type="info">
+              {t('Google sign-up is a placeholder for now and will work once the backend is connected. Please register with your email.')}
+            </Notice>
+          )}
+        </div>
+      )}
+
+      <div className={emailSelected ? 'space-y-5' : 'hidden'}>
       <TextField label={t('Full name')} id="reg-name" name="fullName" autoComplete="name" placeholder={t('e.g. Jane Doe')}
         value={values.fullName} onChange={handleChange} onBlur={handleBlur} error={showError('fullName')} required />
 
@@ -156,19 +179,14 @@ export default function RegisterForm({ from, onSwitch }) {
         {submitting && <span className="h-4 w-4 animate-spin rounded-full border-2 border-night/30 border-t-night" />}
         {submitting ? t('Creating account...') : t('Register')}
       </button>
-
-      <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-night/40">
-        <span className="h-px flex-1 bg-black/10" />
-        {t('or')}
-        <span className="h-px flex-1 bg-black/10" />
+      <button
+        type="button"
+        onClick={() => setEmailSelected(false)}
+        className="w-full text-sm font-medium text-flame-dark hover:underline"
+      >
+        {t('← Back to options')}
+      </button>
       </div>
-
-      <GoogleButton onClick={() => setGoogleNotice(true)} />
-      {googleNotice && (
-        <Notice type="info">
-          {t('Google sign-up is a placeholder for now and will work once the backend is connected. Please register with your email.')}
-        </Notice>
-      )}
 
       <p className="text-center text-sm text-night/70">
         {t('Already have an account?')}{' '}

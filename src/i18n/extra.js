@@ -19,6 +19,8 @@ export const frExtra = {
   'Cancel': 'Annuler',
   'Go back': 'Retour',
   'Back to Home': 'Retour à l’accueil',
+  'Continue with email': 'Continuer avec e-mail',
+  '← Back to options': '← Retour aux options',
   'Email address': 'Adresse e-mail',
   'Phone number': 'Numéro de téléphone',
   'Full name': 'Nom complet',

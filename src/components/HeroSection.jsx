@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import BookCourtButton from './BookCourtButton'
 import { useLang } from '../context/LanguageContext'
+import { club } from '../data/clubData'
 
 export default function HeroSection() {
   const [imgFailed, setImgFailed] = useState(false)
@@ -27,7 +28,7 @@ export default function HeroSection() {
         <div className="relative w-full px-6 py-14 sm:px-10 lg:px-16">
           
           <h1 className="max-w-2xl font-display text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
-            {t('hero.welcome')} <span className="text-flame">Nyarutarama</span> Tennis Club
+            {t('hero.welcome')} <span className="text-flame">{club.name}</span>
           </h1>
           <p className="mt-5 max-w-lg text-base text-white/85">{t('hero.text')}</p>
           <p className="mt-3 max-w-lg text-sm font-medium italic text-ball/90">{t('hero.tagline')}</p>

@@ -38,13 +38,23 @@ function parseFieldErrors(data) {
   return out
 }
 
+// Read Django's csrftoken cookie so mutating requests pass CSRF validation.
+function getCsrfToken() {
+  const match = document.cookie.split('; ').find((c) => c.startsWith('csrftoken='))
+  return match ? decodeURIComponent(match.split('=')[1]) : ''
+}
+
 export async function request(path, { method = 'GET', body } = {}) {
   let res
+  const isMutating = method !== 'GET' && method !== 'HEAD'
   try {
     res = await fetch(`${API_URL}${path}`, {
       method,
       credentials: 'include', // browser sends the secure session cookie, no tokens kept in JS
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ...(isMutating ? { 'X-CSRFToken': getCsrfToken() } : {}),
+      },
       body: body ? JSON.stringify(body) : undefined,
     })
   } catch {

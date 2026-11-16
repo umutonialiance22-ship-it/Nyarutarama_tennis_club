@@ -28,7 +28,7 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white/95 backdrop-blur">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <a href="/#home" className="flex items-center gap-3" onClick={close}>
-          <img src="/logo.png" alt="Club logo" className="h-11 w-11 object-contain" />
+          <img src="/logo.png" alt={`${club.name} logo`} className="h-11 w-11 object-contain" />
           <span className="font-display text-sm font-bold text-night sm:text-lg">{club.name}</span>
         </a>
 
