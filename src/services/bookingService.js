@@ -1,8 +1,6 @@
 import { request, ApiError } from './authService'
 import { demoAddNotification } from './notificationService'
-// DEV-ONLY preview: set VITE_DEMO_MODE=true in .env to see sample bookings without a backend.
-// It can never be on in a production build.
-const DEMO = import.meta.env.DEV && import.meta.env.VITE_DEMO_MODE === 'true'
+import { DEMO_ENABLED as DEMO } from '../config'
 export const isDemoMode = DEMO
 
 // Adjust to your Django URLs

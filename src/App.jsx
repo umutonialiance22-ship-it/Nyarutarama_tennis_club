@@ -5,6 +5,7 @@ import CourtsPage from './pages/CourtsPage'
 import Placeholder from './pages/Placeholder'
 import ProtectedRoute from './components/ProtectedRoute'
 import ScrollToHash from './components/ScrollToHash'
+import PreviewBar from './components/PreviewBar'
 import ManagerLayout from './components/manager/ManagerLayout'
 import OverviewPage from './pages/manager/OverviewPage'
 import BookingsPage from './pages/manager/BookingsPage'
@@ -17,6 +18,7 @@ export default function App() {
   return (
     <>
       <ScrollToHash />
+      <PreviewBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<AuthPage mode="login" />} />

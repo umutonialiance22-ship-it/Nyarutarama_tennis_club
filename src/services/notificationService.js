@@ -1,8 +1,6 @@
 import { request } from './authService'
 import { toISODate } from '../utils/dates'
-
-// Same DEV-only preview switch as before (never active in production builds)
-const DEMO = import.meta.env.DEV && import.meta.env.VITE_DEMO_MODE === 'true'
+import { DEMO_ENABLED as DEMO } from '../config'
 
 // Adjust to your Django URLs
 const ENDPOINTS = {

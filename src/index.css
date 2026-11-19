@@ -13,6 +13,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Phones only (under 640px): slightly larger text */
+@media (max-width: 639px) {
+  html {
+    font-size: 109%;
+  }
+  /* The tiniest labels use fixed pixel sizes, so they need their own bump */
+  .text-\[10px\] {
+    font-size: 0.6875rem;
+  }
+  .text-\[11px\] {
+    font-size: 0.75rem;
+  }
+}
+
 section[id] {
   scroll-margin-top: 80px;
 }

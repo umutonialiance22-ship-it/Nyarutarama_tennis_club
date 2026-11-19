@@ -1,3 +1,4 @@
+import { PREVIEW_MODE } from '../config'
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
 // Adjust these paths to match your Django URLs.
@@ -45,6 +46,7 @@ function getCsrfToken() {
 }
 
 export async function request(path, { method = 'GET', body } = {}) {
+  if (PREVIEW_MODE) throw new ApiError('Prototype mode: no server calls.', 0, {}, 'preview')
   let res
   const isMutating = method !== 'GET' && method !== 'HEAD'
   try {

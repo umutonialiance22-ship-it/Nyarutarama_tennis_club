@@ -4,6 +4,14 @@ export const enExtra = {
   'err.slot_taken': 'That slot was just taken. Please choose another time.',
   'err.not_found': 'Booking not found.',
   'err.signin_failed': 'You are signed in, but we could not load your account. Please try again.',
+    'err.preview': 'This is a prototype with sample data, so signing in is turned off. Use the Preview bar at the bottom to switch role.',
+  'preview.title': 'Prototype · sample data · nothing is saved',
+  'preview.view': 'View as',
+  'preview.visitor': 'Visitor',
+  'preview.customer': 'Customer',
+  'preview.vip': 'VIP customer',
+  'preview.manager': 'Manager',
+  'preview.reset': 'Reset',
 }
 
 export const frExtra = {
@@ -315,4 +323,13 @@ export const frExtra = {
   '{name} is now inactive.': '{name} est maintenant inactif.',
   'Coach account created for {name} (demo: no invitation was actually sent).':
     'Compte entraîneur créé pour {name} (démo : aucune invitation n’a été envoyée).',
+  
+    'err.preview': 'Ceci est un prototype avec des données d’exemple : la connexion est désactivée. Utilisez la barre Aperçu en bas pour changer de rôle.',
+  'preview.title': 'Prototype · données d’exemple · rien n’est enregistré',
+  'preview.view': 'Voir en tant que',
+  'preview.visitor': 'Visiteur',
+  'preview.customer': 'Client',
+  'preview.vip': 'Client VIP',
+  'preview.manager': 'Responsable',
+  'preview.reset': 'Réinitialiser',  
 }
